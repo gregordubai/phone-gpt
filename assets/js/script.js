@@ -40,9 +40,28 @@ function startRecording() {
 }
 
 function stopRecording() {
-    if (!isRecording) return;
-
-    mediaRecorder.stop();
     isRecording = false;
-    document.getElementById('recordButton').classList.remove('recording');
+    mediaRecorder.stop();
+    recordButton.classList.remove('recording');
+
+    // This function is triggered once the recording is stopped
+    mediaRecorder.ondataavailable = (event) => {
+        audioChunks.push(event.data);
+
+        let audioBlob = new Blob(audioChunks, { type: 'audio/webm' }); // WebM format
+        sendDataToWebhook(audioBlob);
+    };
+}
+
+function sendDataToWebhook(audioBlob) {
+    const formData = new FormData();
+    formData.append("audio", audioBlob, "recorded_audio.webm"); // Save as .webm
+
+    fetch('https://hook.eu1.make.com/tpsid5dxn9b9mshdncjp0r7hed94qzcp', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => console.error('Error sending data:', error));
 }
