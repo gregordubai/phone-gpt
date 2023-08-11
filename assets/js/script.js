@@ -2,9 +2,21 @@ let isRecording = false;
 let mediaRecorder;
 let audioChunks = [];
 
-document.getElementById('recordButton').addEventListener('mousedown', startRecording);
-document.getElementById('recordButton').addEventListener('mouseup', stopRecording);
+const recordButton = document.getElementById('recordButton');
 
+// Desktop events
+recordButton.addEventListener('mousedown', startRecording);
+recordButton.addEventListener('mouseup', stopRecording);
+
+// Mobile touch events
+recordButton.addEventListener('touchstart', (e) => {
+    e.preventDefault();  // Prevents the mouse event from being called
+    startRecording();
+});
+recordButton.addEventListener('touchend', (e) => {
+    e.preventDefault();  // Prevents the mouse event from being called
+    stopRecording();
+});
 function startRecording() {
     if (isRecording) return;
 
