@@ -1,17 +1,13 @@
-// script.js
 let isRecording = false;
 let mediaRecorder;
 let audioChunks = [];
 
-document.getElementById('recordButton').addEventListener('click', () => {
-    if (!isRecording) {
-        startRecording();
-    } else {
-        stopRecording();
-    }
-});
+document.getElementById('recordButton').addEventListener('mousedown', startRecording);
+document.getElementById('recordButton').addEventListener('mouseup', stopRecording);
 
 function startRecording() {
+    if (isRecording) return;
+
     navigator.mediaDevices.getUserMedia({ audio: true })
         .then(stream => {
             mediaRecorder = new MediaRecorder(stream);
@@ -24,6 +20,7 @@ function startRecording() {
             };
             mediaRecorder.start();
             isRecording = true;
+            document.getElementById('recordButton').classList.add('recording');
         })
         .catch(error => {
             console.error('Error accessing microphone:', error);
@@ -31,7 +28,9 @@ function startRecording() {
 }
 
 function stopRecording() {
+    if (!isRecording) return;
+
     mediaRecorder.stop();
     isRecording = false;
+    document.getElementById('recordButton').classList.remove('recording');
 }
-
