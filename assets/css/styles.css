@@ -34,3 +34,22 @@ body {
     background-color: red;
     animation: pulsate 1s infinite;
 }
+.mic-body {
+    background-color: #fff;  /* White color for the microphone body */
+    width: 40%;              /* Width of the microphone body */
+    height: 60%;             /* Height of the microphone body */
+    border-radius: 15% 15% 0 0; /* Rounded top corners */
+    position: relative;
+    top: 20%;                /* Position from the top */
+    left: 30%;               /* Centering the microphone body */
+}
+
+.mic-head {
+    background-color: #fff;  /* White color for the microphone head */
+    width: 60%;              /* Width of the microphone head */
+    height: 40%;             /* Height of the microphone head */
+    border-radius: 50%;      /* Making it round */
+    position: relative;
+    top: 10%;                /* Position from the top */
+    left: 20%;               /* Centering the microphone head */
+}
