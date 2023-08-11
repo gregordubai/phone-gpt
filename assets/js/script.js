@@ -34,3 +34,4 @@ function stopRecording() {
     isRecording = false;
     document.getElementById('recordButton').classList.remove('recording');
 }
+/* 40% of the viewport width */
