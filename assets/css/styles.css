@@ -16,6 +16,7 @@ body {
     align-items: center;
     font-size: 24px;
     transition: background-color 0.3s; /* Smooth transition between colors */
+    position: relative; /* This will help in positioning the microphone parts */
 }
 
 @keyframes pulsate {
@@ -34,22 +35,24 @@ body {
     background-color: red;
     animation: pulsate 1s infinite;
 }
+
 .mic-body {
-    background-color: #fff;  /* White color for the microphone body */
-    width: 40%;              /* Width of the microphone body */
-    height: 60%;             /* Height of the microphone body */
-    border-radius: 15% 15% 0 0; /* Rounded top corners */
-    position: relative;
-    top: 20%;                /* Position from the top */
-    left: 30%;               /* Centering the microphone body */
+    background-color: #fff;
+    width: 30%;            /* Slimmer body */
+    height: 40%;           /* Adjusted height */
+    border-radius: 10% 10% 0 0; /* Slightly rounded top corners */
+    position: absolute;    /* Absolute positioning inside the recordButton */
+    bottom: 15%;           /* Positioning it towards the bottom of the recordButton */
+    left: 35%;             /* Centering it horizontally */
+    z-index: 1;            /* Making sure it stays above the head part */
 }
 
 .mic-head {
-    background-color: #fff;  /* White color for the microphone head */
-    width: 60%;              /* Width of the microphone head */
-    height: 40%;             /* Height of the microphone head */
-    border-radius: 50%;      /* Making it round */
-    position: relative;
-    top: 10%;                /* Position from the top */
-    left: 20%;               /* Centering the microphone head */
+    background-color: #fff;
+    width: 50%;            /* Adjusted width for the head */
+    height: 30%;           /* Adjusted height */
+    border-radius: 50%;    /* Making it round */
+    position: absolute;    /* Absolute positioning inside the recordButton */
+    top: 20%;              /* Positioning it towards the top of the recordButton */
+    left: 25%;             /* Centering it horizontally */
 }
