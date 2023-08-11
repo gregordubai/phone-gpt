@@ -54,27 +54,17 @@ function stopRecording() {
 }
 
 function sendDataToWebhook(audioBlob) {
-    // Convert blob to Base64
-    const reader = new FileReader();
-    reader.readAsDataURL(audioBlob);
-    reader.onloadend = () => {
-        const base64Audio = reader.result.split(',')[1];
-        
-        const payload = {
-            filename: "audio.webm",
-            filedata: base64Audio
-        };
+    const formData = new FormData();
+    formData.append("file", audioBlob, "audio.webm");
+    formData.append("model", "whisper-1"); // If this parameter isn't needed for your webhook, you can remove it
 
-        fetch('https://hook.eu1.make.com/tpsid5dxn9b9mshdncjp0r7hed94qzcp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch((error) => console.error('Error sending data:', error));
-    };
+    fetch('https://hook.eu1.make.com/tpsid5dxn9b9mshdncjp0r7hed94qzcp', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => console.error('Error sending data:', error));
 }
+
 
